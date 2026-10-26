@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: latihan-kafka
+
+  kafka:
+    bootstrap-servers: "localhost:9092"
+
+    # ===== PRODUCER =====
+    producer:
+      acks: all
+      retries: 3
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+    # ===== CONSUMER =====
+    consumer:
+      group-id: demo-group
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+    # ===== LISTENER =====
+    listener:
+      ack-mode: manual # commit offset manual
+      missing-topics-fatal: false
+
+    # ===== ADMIN =====
+    admin:
+      auto-create: true
+
+# ===== CUSTOM PROPERTY =====
+app:
+  kafka:
+    topic: demo-kafka
